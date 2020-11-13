@@ -315,6 +315,9 @@ module C-DECL-INITIALIZER
           requires notBool isNoName(F)
      rule firstField(_, _, _) => noMoreFields [owise]
 
+     rule fillInit(CodeLoc(I, _) => I)
+          [structural]
+
      rule <k> fillInit(InitFragment(NextInit(), Exp:KItem)) => fillInit(Exp) ...</k>
           <curr-subobject>
                ListItem(K:KItem) Remainder::List

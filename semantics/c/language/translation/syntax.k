@@ -276,7 +276,7 @@ module C-ABSTRACT-SYNTAX
      */
      syntax KItem ::= OffsetOf(KItem, KItem, KItem) [strict(1), symbol]
      syntax KItem ::= TypesCompat(KItem, KItem, KItem, KItem) [strict(1, 3), symbol]
-     syntax KItem ::= ExpressionLoc(KItem, KItem) [function]
+     syntax KItem ::= ExpressionLoc(K, K) [function]
 
      //must be declared as function,
      //otherwise, if then else rule failed in for(;;) cases
@@ -394,6 +394,7 @@ module C-ABSTRACT-SYNTAX
 
      syntax KItem ::= DefinitionLoc(KItem, CabsLoc) [symbol]
      syntax KItem ::= DefinitionLocRange(KItem, CabsLoc, CabsLoc) [symbol]
+     syntax KItem ::= InitLoc(KItem, CabsLoc) [symbol]
      // this wraps all statements with their location in the original file
      syntax KItem ::= StatementLoc(KItem, CabsLoc) [symbol] // new
 
@@ -464,6 +465,7 @@ module C-ABSTRACT-REWRITING
      rule AnonymousName() => #NoName
 
      rule DefinitionLoc(K:KItem, L::CabsLoc) => CodeLoc(K, L) [anywhere]
+     rule InitLoc(K:KItem, L::CabsLoc) => CodeLoc(K, L) [anywhere]
      rule StatementLoc(K:KItem, L::CabsLoc) => CodeLoc(K, L) [anywhere]
 
      rule Conditional(K1:KItem, K2:KItem, K3:KItem) => K1 ? K2 : K3 [anywhere]
