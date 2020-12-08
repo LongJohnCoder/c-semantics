@@ -79,7 +79,7 @@ module C-TRANSLATION-INIT
      rule (ExpLoc(ncle(K:KItem, T::Type), _::CabsLoc) => ncle(K, T)) --
      rule (ExpLoc(ncle(K:KItem, T::Type), _::CabsLoc) => ncle(K, T)) := _
 
-     syntax KItem ::= leftExpLoc(L:CabsLoc) | rightExpLoc(L:CabsLoc)
+     syntax KItem ::= leftExpLoc(CabsLoc) | rightExpLoc(CabsLoc)
 
      // bitwise.k
      rule ExpLoc(te(...) #as Te, L:CabsLoc) >> Right:RValue => Te >> Right ~> leftExpLoc(L)
