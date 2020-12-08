@@ -60,29 +60,20 @@ module C-TRANSLATION-INIT
           <curr-program-loc> _ => L </curr-program-loc>
           requires notBool isKResult(K)
      rule
-          <k> (K:RValue ~> #freezerExpLoc(L)) => ExpLoc(K, L) ... </k>
-          <curr-program-loc> _ => L </curr-program-loc>
-     rule
           <k> (K:KItem ~> #freezerExpLoc(L::CabsLoc)) => ExpLoc(K, L) ... </k>
           <curr-program-loc> _ => L </curr-program-loc>
-          requires isKResult(K) andBool notBool isRValue(K)
+          requires isKResult(K) orBool isRValue(K)
 
-
-     rule <k>ArrayType(_:Type, (ExpLoc(V:RValue, L:CabsLoc) => V), _) ...</k>
-          <curr-program-loc> _ => L </curr-program-loc>
-          [structural]
-     /*
      rule
           <k> reval(ExpLoc(K:RValue, L::CabsLoc) => K) ... </k>
           <curr-program-loc> _ => L </curr-program-loc>
-     */
      rule reval(ExpLoc(ExpLoc(K:K, _::CabsLoc) => K, _::CabsLoc))
 
      rule reval(ExpLoc(ncle(K:KItem, T::Type), _::CabsLoc) => te(K, rvalType(T)))
      rule reval(ExpLoc(nclv(Loc::SymLoc, T::Type), _::CabsLoc) => nclv(Loc, T))
 
      rule isKResult(ExpLoc(K:K, _::CabsLoc)) => isKResult(K)
-     rule isRValue(ExpLoc(K:K, _::CabsLoc)) => isRValue(K)
+     //rule isRValue(ExpLoc(K:K, _::CabsLoc)) => isRValue(K)
 
      rule (ExpLoc(ncle(K:KItem, T::Type), _::CabsLoc) => ncle(K, T)) ++
      rule (ExpLoc(ncle(K:KItem, T::Type), _::CabsLoc) => ncle(K, T)) --
