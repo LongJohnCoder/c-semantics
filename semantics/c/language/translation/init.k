@@ -70,7 +70,7 @@ module C-TRANSLATION-INIT
      rule reval(ExpLoc(ExpLoc(K:K, _::CabsLoc) => K, _::CabsLoc))
 
      rule reval(ExpLoc(ncle(K:KItem, T::Type) => te(K, rvalType(T)), _::CabsLoc))
-     rule reval(ExpLoc(nclv(Loc::SymLoc, T::Type), _::CabsLoc) => nclv(Loc, T))
+     //rule reval(ExpLoc(nclv(Loc::SymLoc, T::Type), _::CabsLoc) => nclv(Loc, T))
 
      rule isKResult(ExpLoc(K:K, _::CabsLoc)) => isKResult(K)
      //rule isRValue(ExpLoc(K:K, _::CabsLoc)) => isRValue(K)
