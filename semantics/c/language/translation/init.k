@@ -52,12 +52,12 @@ module C-TRANSLATION-INIT
      rule typeof(ExpLoc(K:K, L::CabsLoc) => K)
      rule utype(ExpLoc(K:K, L::CabsLoc) => K)
      rule type(ExpLoc(K:K, L::CabsLoc) => K)
-     rule stripHold(ExpLoc(K:K, L::CabsLoc)) => ExpLoc(stripHold(K), L)
+     rule stripHold(ExpLoc(K:KItem, L::CabsLoc)) => ExpLoc(stripHold(K), L)
 
      rule isKResult(ExpLoc(K:K, _::CabsLoc)) => isKResult(K)
      rule isRValue(ExpLoc(K:K, _::CabsLoc)) => isRValue(K)
      rule isHold(ExpLoc(K:K, _::CabsLoc)) => isHold(K)
-     rule fromConstantExpr(ExpLoc(K:K, L::CabsLoc) => K)
+     rule fromConstantExpr(ExpLoc(K:KItem, L::CabsLoc) => K)
 
      syntax KItem ::= #freezerExpLoc(CabsLoc)
 
