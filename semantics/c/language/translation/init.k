@@ -57,7 +57,7 @@ module C-TRANSLATION-INIT
      rule isKResult(ExpLoc(K:K, _::CabsLoc)) => isKResult(K)
      rule isRValue(ExpLoc(K:K, _::CabsLoc)) => isRValue(K)
      rule isHold(ExpLoc(K:K, _::CabsLoc)) => isHold(K)
-     rule fromConstantExpr(ExpLoc(K:KItem, L::CabsLoc) => K)
+     rule fromConstantExpr(ExpLoc(K:KItem, L::CabsLoc)) => fromConstantExpr(K)
 
      syntax KItem ::= #freezerExpLoc(CabsLoc)
 

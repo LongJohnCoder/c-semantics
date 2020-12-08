@@ -342,6 +342,7 @@ module C-TYPING-SYNTAX
      syntax Bool ::= fromConstantExpr(UType) [function]
      syntax Bool ::= fromConstantExpr(Type) [function]
      syntax Bool ::= fromConstantExpr(RValue) [function]
+     syntax Bool ::= fromConstantExpr(Location) [function]
 
      syntax Bool ::= isNull(RValue) [function]
      syntax Bool ::= isNullPointerConstant(RValue) [function]
