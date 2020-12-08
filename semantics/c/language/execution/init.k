@@ -276,5 +276,12 @@ module C-EXECUTION-INIT
           <curr-tu>TU::String</curr-tu>
 
      rule currentSemantics() => ExecutionSemantics()
+
+     syntax Location ::= #ExecExpLoc(K, CabsLoc)
+     rule <k> ExpLoc(K:K, L:CabsLoc) => #ExecExpLoc(K, L) ...</k>
+          <curr-program-loc> _ => L </curr-program-loc>
+     rule <k> #ExecExpLoc(V:RValue, L:CabsLoc) => V ...</k>
+          <curr-program-loc> _ => L </curr-program-loc>
+
 endmodule
 
