@@ -57,7 +57,6 @@ module C-TRANSLATION-INIT
 
      rule
           <k> ExpLoc(K:K, L::CabsLoc) => K ~> #freezerExpLoc(L) ... </k>
-          <elab>... .K => L </elab>
           <curr-program-loc> _ => L </curr-program-loc>
           requires notBool isKResult(K)
      rule
