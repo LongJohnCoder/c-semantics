@@ -74,6 +74,7 @@ module C-TRANSLATION-INIT
 
      rule isKResult(ExpLoc(K:K, _::CabsLoc)) => isKResult(K)
      rule isRValue(ExpLoc(K:K, _::CabsLoc)) => isRValue(K)
+     rule isHold(ExpLoc(K:K, _::CabsLoc)) => isHold(K)
 
      rule (ExpLoc(ncle(K:KItem, T::Type), _::CabsLoc) => ncle(K, T)) ++
      rule (ExpLoc(ncle(K:KItem, T::Type), _::CabsLoc) => ncle(K, T)) --
