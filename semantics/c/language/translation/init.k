@@ -69,7 +69,6 @@ module C-TRANSLATION-INIT
 
      rule
           <k> reval(ExpLoc(K:RValue, L::CabsLoc) => K) ... </k>
-          <elab>... .K => L </elab>
           <curr-program-loc> _ => L </curr-program-loc>
      rule reval(ExpLoc(ExpLoc(K:K, _::CabsLoc) => K, _::CabsLoc))
 
