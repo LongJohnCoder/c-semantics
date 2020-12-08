@@ -84,15 +84,15 @@ module C-TRANSLATION-INIT
      // bitwise.k
      rule ExpLoc(te(...) #as Te, L:CabsLoc) >> Right:RValue => Te >> Right ~> leftExpLoc(L)
      rule ExpLoc(tv(...) #as Tv, L:CabsLoc) >> Right:RValue => Tv >> Right ~> leftExpLoc(L)
-     rule Left:RValue >> ExpLoc(te(...) #as Te, L:CabsLoc) => Te >> Right ~> rightExpLoc(L)
-     rule Left:RValue >> ExpLoc(tv(...) #as Tv, L:CabsLoc) => Tv >> Right ~> rightExpLoc(L)
+     rule Left:RValue >> ExpLoc(te(...) #as Te, L:CabsLoc) => Left >> Te ~> rightExpLoc(L)
+     rule Left:RValue >> ExpLoc(tv(...) #as Tv, L:CabsLoc) => Left >> Tv ~> rightExpLoc(L)
      rule te(Left:KItem >> Right:KItem, T:UType) ~> leftExpLoc(L:CabsLoc) => te(ExpLoc(Left, L) >> Right, T)
      rule te(Left:KItem >> Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(Left >> ExpLoc(Right, L), T)
 
      rule ExpLoc(te(...) #as Te, L:CabsLoc) << Right:RValue => Te << Right ~> leftExpLoc(L)
      rule ExpLoc(tv(...) #as Tv, L:CabsLoc) << Right:RValue => Tv << Right ~> leftExpLoc(L)
-     rule Left:RValue << ExpLoc(te(...) #as Te, L:CabsLoc) => Te << Right ~> rightExpLoc(L)
-     rule Left:RValue << ExpLoc(tv(...) #as Tv, L:CabsLoc) => Tv << Right ~> rightExpLoc(L)
+     rule Left:RValue << ExpLoc(te(...) #as Te, L:CabsLoc) => Left << Te ~> rightExpLoc(L)
+     rule Left:RValue << ExpLoc(tv(...) #as Tv, L:CabsLoc) => Left << Tv ~> rightExpLoc(L)
      rule te(Left:KItem << Right:KItem, T:UType) ~> leftExpLoc(L:CabsLoc) => te(ExpLoc(Left, L) << Right, T)
      rule te(Left:KItem << Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(Left << ExpLoc(Right, L), T)
 
