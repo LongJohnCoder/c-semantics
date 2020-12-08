@@ -67,6 +67,10 @@ module C-TRANSLATION-INIT
           <curr-program-loc> _ => L </curr-program-loc>
           requires isKResult(K) andBool notBool isRValue(K)
 
+
+     rule <k>ArrayType(_:Type, (ExpLoc(V:RValue, L:CabsLoc) => V), _) ...</k>
+          <curr-program-loc> _ => L </curr-program-loc>
+          [structural]
      /*
      rule
           <k> reval(ExpLoc(K:RValue, L::CabsLoc) => K) ... </k>
