@@ -66,7 +66,7 @@ module C-TRANSLATION-INIT
      rule
           <k> (K:KItem ~> #freezerExpLoc(L::CabsLoc)) => ExpLoc(K, L) ... </k>
           <curr-program-loc> _ => L </curr-program-loc>
-          requires isKResult(K) andBool notBool isRvalue(K)
+          requires isKResult(K) andBool notBool isRValue(K)
 
      rule
           <k> reval(ExpLoc(K:RValue, L::CabsLoc) => K) ... </k>
