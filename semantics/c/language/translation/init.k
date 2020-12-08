@@ -79,6 +79,9 @@ module C-TRANSLATION-INIT
      rule (ExpLoc(ncle(K:KItem, T::Type), _::CabsLoc) => ncle(K, T)) --
      rule (ExpLoc(ncle(K:KItem, T::Type), _::CabsLoc) => ncle(K, T)) := _
 
+     // interpretation.k
+     rule ArrayType(_, ExpLoc(V:RValue) => V, _)
+
      // Assignment.k
      rule (ExpLoc(_:Nclv, _::CabsLoc) #as E1) *= E2:RValue
           => compoundAssign(E1, ncle(LHOLE, type(E1)) := te(RHOLE, utype(E1)) * E2)
