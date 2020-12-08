@@ -37,6 +37,7 @@ module C-TYPING-SYNTAX
 
      syntax Qualifier // defined in C-SYNTAX
      syntax StorageClassSpecifier // defined in C-SYNTAX
+     syntax Location  // defined in C-TRANSLATION-INIT
 
      syntax Type ::= t(q: Quals, m: Set, st: SimpleType) // possibly-qualified type
      syntax UType ::= ut(m: Set, st: SimpleUType)     // unqualified type
