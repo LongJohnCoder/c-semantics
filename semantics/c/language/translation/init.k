@@ -50,11 +50,12 @@ module C-TRANSLATION-INIT
           => UnknownCabsLoc
      rule filterCabsLoc(L:CabsLoc) => L [owise]
 
-     rule ExpressionLoc(K:K, L::CabsLoc) => ExpLoc(K, L)
-     rule typeof(ExpLoc(K:K, L::CabsLoc) => K)
-     rule utype(ExpLoc(K:K, L::CabsLoc) => K)
-     rule type(ExpLoc(K:K, L::CabsLoc) => K)
+     rule ExpressionLoc(K:K, L:CabsLoc) => ExpLoc(K, L)
+     rule typeof(ExpLoc(K:K, _:CabsLoc) => K)
+     rule utype(ExpLoc(K:K, _:CabsLoc) => K)
+     rule type(ExpLoc(K:K, _:CabsLoc) => K)
      rule stripHold(ExpLoc(K:KItem, L::CabsLoc)) => ExpLoc(stripHold(K), L)
+     rule value(ExpLoc(K:K, _:CabsLoc) => K)
 
      rule isKResult(ExpLoc(K:K, _::CabsLoc)) => isKResult(K)
      rule isRValue(ExpLoc(K:K, _::CabsLoc)) => isRValue(K)
