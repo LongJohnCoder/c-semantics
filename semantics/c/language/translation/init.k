@@ -86,14 +86,14 @@ module C-TRANSLATION-INIT
      rule reval(ExpLoc(ncle(K:KItem, T::Type) => te(K, rvalType(T)), _::CabsLoc))
      //rule reval(ExpLoc(nclv(Loc::SymLoc, T::Type), _::CabsLoc) => nclv(Loc, T))
 
-     rule (ExpLoc(ncle(K:KItem, T::Type), _::CabsLoc) => ncle(K, T)) ++
-     rule (ExpLoc(ncle(K:KItem, T::Type), _::CabsLoc) => ncle(K, T)) --
-     rule (ExpLoc(ncle(K:KItem, T::Type), _::CabsLoc) => ncle(K, T)) := _
+     rule (ExpLoc(ncle(K:KItem, T::Type), _:CabsLoc) => ncle(K, T)) ++
+     rule (ExpLoc(ncle(K:KItem, T::Type), _:CabsLoc) => ncle(K, T)) --
+     rule (ExpLoc(ncle(K:KItem, T::Type), _:CabsLoc) => ncle(K, T)) := _
 
      syntax KItem ::= leftExpLoc(CabsLoc) | rightExpLoc(CabsLoc)
 
      // tagged.k
-     rule initEnum(X:CId, (ExpLoc(tv(...) #as V:RValue) => V))
+     rule initEnum(X:CId, (ExpLoc(tv(...) #as V:RValue, _:CabsLoc) => V))
 
      // bitwise.k
      rule ExpLoc(te(...) #as Te, L:CabsLoc) >> Right:RValue => Te >> Right ~> leftExpLoc(L)
