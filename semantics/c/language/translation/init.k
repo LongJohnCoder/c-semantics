@@ -190,6 +190,11 @@ module C-TRANSLATION-INIT
      rule & ExpLoc(tv(...) #as Tv, L:CabsLoc) => & Tv ~> rightExpLoc(L)
      rule te(& V:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(& ExpLoc(V, L), T)
 
+     // translation/function-call.k
+
+     rule <k>Call(ExpLoc(tv(...) #as Tv, L:CabsLoc), A:KItem) => Call(Tv, A) ~> rightExpLoc(L) ...</k>
+          <curr-program-loc> _ => L </curr-program-loc>
+
      // common/cast.k
      rule cast(T:UType, ExpLoc(tv(...) #as Tv, L:CabsLoc)) => cast(T, Tv)
      rule cast(T:UType, ExpLoc(tv(...) #as Tv, L:CabsLoc), Explicit:Bool) => cast(T, Tv, Explicit)
