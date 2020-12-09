@@ -91,6 +91,9 @@ module C-TRANSLATION-INIT
 
      syntax KItem ::= leftExpLoc(CabsLoc) | rightExpLoc(CabsLoc)
 
+     // tagged.k
+     rule initEnum(X:CId, (ExpLoc(tv(...) #as V:RValue) => V))
+
      // bitwise.k
      rule ExpLoc(te(...) #as Te, L:CabsLoc) >> Right:RValue => Te >> Right ~> leftExpLoc(L)
      rule ExpLoc(tv(...) #as Tv, L:CabsLoc) >> Right:RValue => Tv >> Right ~> leftExpLoc(L)
