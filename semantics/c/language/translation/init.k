@@ -11,6 +11,7 @@ module C-TRANSLATION-INIT
      imports C-CONVERSION-SYNTAX
      imports C-DECL-INITIALIZER-SYNTAX
      imports C-DECL-RESOLUTION-SYNTAX
+     imports C-DECL-TAGGED
      imports C-DYNAMIC-SYNTAX
      imports C-ELABORATOR-SYNTAX
      imports C-SYNTAX
