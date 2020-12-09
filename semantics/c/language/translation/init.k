@@ -168,6 +168,9 @@ module C-TRANSLATION-INIT
      rule tv(...) #as Tv:RValue ~> rightExpLoc(L:CabsLoc) => ExpLoc(Tv, L)
      rule tv(...) #as Tv:RValue ~> leftExpLoc(L:CabsLoc) => ExpLoc(Tv, L)
 
+     rule ExpLoc(tv(...) #as Tv:RValue, _:CabsLoc) ~> rightExpLoc(L:CabsLoc) => ExpLoc(Tv, L)
+     rule ExpLoc(tv(...) #as Tv:RValue, _:CabsLoc) ~> leftExpLoc(L:CabsLoc) => ExpLoc(Tv, L)
+
      // common/cast.k
      rule cast(T:UType, ExpLoc(tv(...) #as Tv, L:CabsLoc)) => cast(T, Tv)
      rule cast(T:UType, ExpLoc(tv(...) #as Tv, L:CabsLoc), Explicit:Bool) => cast(T, Tv, Explicit)
