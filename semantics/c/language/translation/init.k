@@ -73,7 +73,7 @@ module C-TRANSLATION-INIT
           <curr-program-loc> _ => L </curr-program-loc>
           requires (isKResult(K) orBool isRValue(K)) andBool notBool isLocation(K)
      rule
-          (ExpLoc(K:KItem, _::CabsLoc) =>  .K) ~> #freezerExpLoc(...)
+          (ExpLoc(K:KItem, _::CabsLoc) => K) ~> #freezerExpLoc(...)
           requires isKResult(K) orBool isRValue(K)
 
      rule
