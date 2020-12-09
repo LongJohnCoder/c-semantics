@@ -6,6 +6,7 @@ module C-TRANSLATION-INIT
      imports OPTIONS-SYNTAX
      imports SETTINGS-SYNTAX
      imports C-ABSTRACT-SYNTAX
+     imports C-CHECK-USE-SYNTAX
      imports C-COMMON-PROMOTION-SYNTAX
      imports C-CONFIGURATION
      imports C-CONVERSION-SYNTAX
