@@ -184,7 +184,7 @@ module C-TRANSLATION-INIT
      rule * ExpLoc(te(...) #as Te, L:CabsLoc) => * Te ~> rightExpLoc(L)
      rule * ExpLoc(tv(...) #as Tv, L:CabsLoc) => * Tv ~> rightExpLoc(L)
      rule te(* V:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(* ExpLoc(V, L), T)  // Do I need this?
-     rule ncle(* V:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => ncle(* ExpLoc(V, L), T)
+     rule ncle(* V:KItem, T:Type) ~> rightExpLoc(L:CabsLoc) => ncle(* ExpLoc(V, L), T)
 
      rule & ExpLoc(te(...) #as Te, L:CabsLoc) => & Te ~> rightExpLoc(L)
      rule & ExpLoc(tv(...) #as Tv, L:CabsLoc) => & Tv ~> rightExpLoc(L)
