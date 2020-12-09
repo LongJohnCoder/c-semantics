@@ -59,15 +59,8 @@ module C-TRANSLATION-INIT
      rule isKResult(ExpLoc(K:K, _::CabsLoc)) => isKResult(K)
      rule isRValue(ExpLoc(K:K, _::CabsLoc)) => isRValue(K)
      rule isHold(ExpLoc(K:K, _::CabsLoc)) => isHold(K)
-     rule fromConstantExpr(ExpLoc(te(...) #as V:RValue, _::CabsLoc)) => fromConstantExpr(V)  // false
-     rule fromConstantExpr(ExpLoc(tv(...) #as V:RValue, _::CabsLoc)) => fromConstantExpr(V)  // true
-     //rule fromConstantExpr(ExpLoc(V:RValue, _::CabsLoc)) => fromConstantExprStuck(V) requires notBool isRHold(V) 
-     rule fromConstantExpr(ExpLoc(...) #as E) => fromConstantExprStuckLocation(E) [owise]
+     rule fromConstantExpr(ExpLoc(V:RValue, _::CabsLoc)) => fromConstantExpr(V)
 
-     syntax Bool ::= fromConstantExprStuck(RValue)  [function]
-     syntax Bool ::= fromConstantExprStuckLocation(Location)  [function]
-     syntax Bool ::= fromConstantExprStuckTe(Bool)  [function]
-     syntax Bool ::= fromConstantExprStuckTv(Bool)  [function]
 
      syntax KItem ::= #freezerExpLoc(CabsLoc)
 
@@ -78,6 +71,9 @@ module C-TRANSLATION-INIT
      rule
           <k> (K:KItem ~> #freezerExpLoc(L::CabsLoc)) => ExpLoc(K, L) ... </k>
           <curr-program-loc> _ => L </curr-program-loc>
+          requires (isKResult(K) orBool isRValue(K)) andBool notBool isLocation(K)
+     rule
+          (ExpLoc(K:KItem, _::CabsLoc) =>  .K) ~> #freezerExpLoc(...)
           requires isKResult(K) orBool isRValue(K)
 
      rule
