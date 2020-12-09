@@ -79,11 +79,12 @@ module C-TRANSLATION-INIT
           requires isKResult(K) orBool isRValue(K)
 
      rule
-          <k> reval(ExpLoc(K:RValue, L::CabsLoc) => K) ... </k>
+          <k> reval(ExpLoc(K:K, L::CabsLoc)) => reval(K) ~> #freezerExpLoc(L) ... </k>
           <curr-program-loc> _ => L </curr-program-loc>
+          requires notBool isRValue(K)  // Works only in the C semantics
      rule reval(ExpLoc(ExpLoc(K:K, _::CabsLoc) => K, _::CabsLoc))
 
-     rule reval(ExpLoc(ncle(K:KItem, T::Type) => te(K, rvalType(T)), _::CabsLoc))
+     //rule reval(ExpLoc(ncle(K:KItem, T::Type) => te(K, rvalType(T)), _::CabsLoc))
      //rule reval(ExpLoc(nclv(Loc::SymLoc, T::Type), _::CabsLoc) => nclv(Loc, T))
 
      rule (ExpLoc(ncle(K:KItem, T::Type), _:CabsLoc) => ncle(K, T)) ++
