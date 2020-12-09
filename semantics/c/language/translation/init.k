@@ -109,7 +109,6 @@ module C-TRANSLATION-INIT
      rule te(Left:KItem << Right:KItem, T:UType) ~> leftExpLoc(L:CabsLoc) => te(ExpLoc(Left, L) << Right, T)
      rule te(Left:KItem << Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(Left << ExpLoc(Right, L), T)
 
-     rule cast(T:UType, ExpLoc(te(...) #as Te, L:CabsLoc)) => cast(T, Te) ~> rightExpLoc(L)
      rule cast(T:UType, ExpLoc(tv(...) #as Tv, L:CabsLoc)) => cast(T, Tv) ~> rightExpLoc(L)
      rule tv(...) #as Tv:RValue ~> rightExpLoc(L:CabsLoc) => ExpLoc(Tv, L)
 
