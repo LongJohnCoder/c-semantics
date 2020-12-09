@@ -58,7 +58,7 @@ module C-TRANSLATION-INIT
      rule isKResult(ExpLoc(K:K, _::CabsLoc)) => isKResult(K)
      rule isRValue(ExpLoc(K:K, _::CabsLoc)) => isRValue(K)
      rule isHold(ExpLoc(K:K, _::CabsLoc)) => isHold(K)
-     rule fromConstantExpr(ExpLoc(te(...) #as V:RValue, _::CabsLoc)) => fromConstantExprStuckTe(fromConstantExpr(V))
+     rule fromConstantExpr(ExpLoc(te(...) #as V:RValue, _::CabsLoc)) => fromConstantExpr(V)  // false
      rule fromConstantExpr(ExpLoc(tv(...) #as V:RValue, _::CabsLoc)) => fromConstantExpr(V)  // true
      //rule fromConstantExpr(ExpLoc(V:RValue, _::CabsLoc)) => fromConstantExprStuck(V) requires notBool isRHold(V) 
      rule fromConstantExpr(ExpLoc(...) #as E) => fromConstantExprStuckLocation(E) [owise]
