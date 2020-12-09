@@ -108,12 +108,21 @@ module C-TRANSLATION-INIT
      rule te(Left:KItem << Right:KItem, T:UType) ~> leftExpLoc(L:CabsLoc) => te(ExpLoc(Left, L) << Right, T)
      rule te(Left:KItem << Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(Left << ExpLoc(Right, L), T)
 
+     rule cast(T:UType, ExpLoc(te(...) #as Te, L:CabsLoc)) => cast(T, Te) ~> rightExpLoc(L)
+          requires isRValue(Te)
+     rule cast(T:UType, ExpLoc(tv(...) #as Tv, L:CabsLoc)) => cast(T, Tv) ~> rightExpLoc(L)
+          requires isRValue(Te)
+     rule tv(...) #as Tv:RValue ~> rightExpLoc(L:CabsLoc) => ExpLoc(Tv, L)
+
      rule L:Location & R:Location => te(stripHold(L) & stripHold(R), utype(L))
           requires (isHold(L) orBool isHold(R))
                andBool isPromoted(utype(L))
                andBool utype(L) ==Type utype(R)
                andBool notBool (fromConstantExpr(L) andBool /* xorBool in original */ fromConstantExpr(R))
                andBool isRValue(L) andBool isRValue(R)
+
+     // translation/cast.k
+     rule cast(T'::UType, ExpLoc(te(K:KItem, _), L:CabsLoc), E::Bool) => te(#Cast(type(T'), ExpLoc(K, L), E), T')
 
      // interpretation.k
      rule ArrayType(_, (ExpLoc(V:RValue, _) => V), _)
