@@ -36,11 +36,12 @@ module C-EXPR-BITWISE
           requires isPromoted(T) andBool isPromoted(T')
                andBool notBool (fromConstantExpr(T) xorBool fromConstantExpr(T'))
 
-     rule L:RValue & R:RValue => te(stripHold(L) & stripHold(R), utype(L))
+     rule L:KItem & R:KItem => te(stripHold(L) & stripHold(R), utype(L))
           requires (isHold(L) orBool isHold(R))
                andBool isPromoted(utype(L))
                andBool utype(L) ==Type utype(R)
                andBool notBool (fromConstantExpr(L) xorBool fromConstantExpr(R))
+               andBool isRValue(L) andBool isRValue(R)
      rule L:RValue ^ R:RValue => te(stripHold(L) ^ stripHold(R), utype(L))
           requires (isHold(L) orBool isHold(R))
                andBool isPromoted(utype(L))
