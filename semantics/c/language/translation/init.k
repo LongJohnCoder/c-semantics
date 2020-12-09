@@ -103,7 +103,7 @@ module C-TRANSLATION-INIT
      rule L:Location & R:Location => te(stripHold(L) & stripHold(R), utype(L))
           requires (isHold(L) orBool isHold(R))
                andBool isPromoted(utype(L))
-               //andBool utype(L) ==Type utype(R)
+               andBool utype(L) ==Type utype(R)
                //andBool notBool (fromConstantExpr(L) xorBool fromConstantExpr(R))
                andBool isRValue(L) andBool isRValue(R)
 
