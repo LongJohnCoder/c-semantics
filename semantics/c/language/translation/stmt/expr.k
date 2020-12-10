@@ -42,10 +42,9 @@ module C-STMT-EXPR
           <elab>... .K => Initializer(lv(Loc, T) := checkUse(ExpLoc(tv(V, T'), CLoc))) </elab>
           requires isLinkerLoc(Loc)
                andBool (utype(T) ==Type T')
-     rule <k> Initializer(ncle(L:KItem, T::Type) := ExpLoc(R:RValue), CLoc:CabsLoc) => .K ...</k>
+     rule <k> Initializer(ncle(L:KItem, T::Type) := ExpLoc(R:RValue, CLoc:CabsLoc)) => .K ...</k>
           <elab>... .K => Initializer(L := ExpLoc({stripHold(R)}:>KItem, CLoc)) </elab>
           requires utype(T) ==Type utype(R)
-
 
      rule Initializer(ncle(_, (t(_, _, auto-type) => type(V))) := V:RValue)
      rule (.K => CV("TSE1", "Incompatible types in initializer or function call arguments."))
