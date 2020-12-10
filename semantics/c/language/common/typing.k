@@ -347,6 +347,7 @@ module C-TYPING-SYNTAX
 
      syntax Bool ::= isNull(RValue) [function]
      syntax Bool ::= isNullPointerConstant(RValue) [function]
+     syntax Bool ::= isNullPointerConstant(Location) [function]
 
      syntax Bool ::= hasReadFrom(UType) [function]
      syntax SymLoc ::= getReadFromLoc(UType) [function]
