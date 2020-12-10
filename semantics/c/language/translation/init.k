@@ -63,7 +63,7 @@ module C-TRANSLATION-INIT
      rule isRValue(ExpLoc(K:K, _::CabsLoc)) => isRValue(K)
      rule isHold(ExpLoc(K:K, _::CabsLoc)) => isHold(K)
      rule fromConstantExpr(ExpLoc(V:RValue, _::CabsLoc)) => fromConstantExpr(V)
-     rule isNullPointerConstant(ExpLoc(V:RValue, _:CabsLoc) => V)
+     rule isNullPointerConstant(ExpLoc(V:RValue, _:CabsLoc)) => isNullPointerConstant(V)
 
 
      syntax KItem ::= #freezerExpLoc(CabsLoc)
