@@ -90,6 +90,8 @@ module C-TRANSLATION-INIT
      //rule reval(ExpLoc(ncle(K:KItem, T::Type) => te(K, rvalType(T)), _::CabsLoc))
      //rule reval(ExpLoc(nclv(Loc::SymLoc, T::Type), _::CabsLoc) => nclv(Loc, T))
 
+     rule nclv(...) #as V:Nclv ~> rightExpLoc(L:CabsLoc) => ExpLoc(V, L)
+
      rule (ExpLoc(ncle(K:KItem, T::Type), _:CabsLoc) => ncle(K, T)) ++
      rule (ExpLoc(ncle(K:KItem, T::Type), _:CabsLoc) => ncle(K, T)) --
      rule (ExpLoc(ncle(K:KItem, T::Type), _:CabsLoc) => ncle(K, T)) := _
