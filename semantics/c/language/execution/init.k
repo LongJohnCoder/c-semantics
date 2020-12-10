@@ -296,7 +296,7 @@ module C-EXECUTION-INIT
           <curr-program-loc> _ => L </curr-program-loc>
      rule <k> nclv(...) ~> (#freezerExecExpLoc(L:CabsLoc) => .K) ... </k>
           <curr-program-loc> _ => L </curr-program-loc>
-     rule <k> voidVal() ~> (#freezerExecExpLoc(L:CabsLoc) => .K) ... </k>
+     rule <k> voidVal ~> (#freezerExecExpLoc(L:CabsLoc) => .K) ... </k>
           <curr-program-loc> _ => L </curr-program-loc>
 
 endmodule
