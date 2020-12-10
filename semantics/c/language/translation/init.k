@@ -205,27 +205,24 @@ module C-TRANSLATION-INIT
      rule cast(T:UType, ExpLoc(tv(...) #as Tv, L:CabsLoc)) => cast(T, Tv)
      rule cast(T:UType, ExpLoc(tv(...) #as Tv, L:CabsLoc), Explicit:Bool) => cast(T, Tv, Explicit)
 
-     // rule L:Location & R:Location => te(stripHold(L) & stripHold(R), utype(L))
-     //      requires (isHold(L) orBool isHold(R))
-     //           andBool isPromoted(utype(L))
-     //           andBool utype(L) ==Type utype(R)
-     //           andBool notBool (fromConstantExpr(L) andBool /* xorBool in original */ fromConstantExpr(R))
-     //           andBool isRValue(L) andBool isRValue(R)
-     // rule L:RValue & R:Location => te(stripHold(L) & stripHold(R), utype(L))
-     //      requires (isHold(L) orBool isHold(R))
-     //           andBool isPromoted(utype(L))
-     //           andBool utype(L) ==Type utype(R)
-     //           andBool notBool (fromConstantExpr(L) andBool /* xorBool in original */ fromConstantExpr(R))
-     //           andBool notBool isLocation(L) andBool isRValue(R)
-     // rule L:Location & R:RValue => te(stripHold(L) & stripHold(R), utype(L))
-     //      requires (isHold(L) orBool isHold(R))
-     //           andBool isPromoted(utype(L))
-     //           andBool utype(L) ==Type utype(R)
-     //           andBool notBool (fromConstantExpr(L) andBool /* xorBool in original */ fromConstantExpr(R))
-     //           andBool isRValue(L) andBool notBool isLocation(R)
-
      // translation/cast.k
      rule cast(T'::UType, ExpLoc(te(K:KItem, _), L:CabsLoc), E::Bool) => te(#Cast(type(T'), ExpLoc(K, L), E), T')
+
+     // translation/expr.k
+     rule <k>Initializer(nclv(Loc:SymLoc, T::Type) := ExpLoc(tv(V:CValue, T'::UType), CLoc:CabsLoc))
+          => init(Loc, V, T)
+          ...</k>
+          <curr-program-loc> _ => CLoc </curr-program-loc>
+          requires notBool isLinkerLoc(Loc)
+               andBool (utype(T) ==Type T')
+     rule <k> Initializer(nclv(Loc:SymLoc, T::Type) := ExpLoc(tv(V:CValue, T'::UType), CLoc:CabsLoc)) => .K ...</k>
+          <elab>... .K => Initializer(lv(Loc, T) := checkUse(ExpLoc(tv(V, T'), CLoc))) </elab>
+          requires isLinkerLoc(Loc)
+               andBool (utype(T) ==Type T')
+     rule <k> Initializer(ncle(L:KItem, T::Type) := ExpLoc(R:RValue), CLoc:CabsLoc) => .K ...</k>
+          <elab>... .K => Initializer(L := ExpLoc({stripHold(R)}:>KItem, CLoc)) </elab>
+          requires utype(T) ==Type utype(R)
+
 
      // interpretation.k
      rule ArrayType(_, (ExpLoc(V:RValue, _) => V), _)
