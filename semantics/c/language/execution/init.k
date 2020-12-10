@@ -295,5 +295,8 @@ module C-EXECUTION-INIT
      rule <k> tv(...) ~> (#freezerExecExpLoc(L:CabsLoc) => .K) ... </k>
           <curr-program-loc> _ => L </curr-program-loc>
 
+     rule <k> nclv(...) ~> (#freezerExecExpLoc(L:CabsLoc) => .K) ... </k>
+          <curr-program-loc> _ => L </curr-program-loc>
+
 endmodule
 
