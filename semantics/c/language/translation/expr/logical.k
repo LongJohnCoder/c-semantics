@@ -38,4 +38,12 @@ module C-EXPR-LOGICAL
      rule #or(tv(1, ut(S:Set, int)), _:RValue) => tv(1, ut(S, int))
      rule #or(tv((unknown(I:Int) => #if I ==Int 0 #then 0 #else 1 #fi), ut(_, int)), _)
 
+     rule #or(ExpLoc(te(...) #as Te, L:CabsLoc), Right:RValue) => #or(Te, Right) ~> leftExpLoc(L)
+     rule #or(ExpLoc(tv(...) #as Tv, L:CabsLoc), Right:RValue) => #or(Tv, Right) ~> leftExpLoc(L)
+     rule #or(Left:RValue, ExpLoc(te(...) #as Te, L:CabsLoc)) => #or(Left, Te) ~> rightExpLoc(L)
+     rule #or(Left:RValue, ExpLoc(tv(...) #as Tv, L:CabsLoc)) => #or(Left, Tv) ~> rightExpLoc(L)
+     rule te(Left:KItem || Right:KItem, T:UType) ~> leftExpLoc(L:CabsLoc) => te(ExpLoc(Left, L) || Right, T)
+     rule te(Left:KItem || Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(Left || ExpLoc(Right, L), T)
+
+
 endmodule
