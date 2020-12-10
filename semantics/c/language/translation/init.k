@@ -209,19 +209,6 @@ module C-TRANSLATION-INIT
      rule cast(T'::UType, ExpLoc(te(K:KItem, _), L:CabsLoc), E::Bool) => te(#Cast(type(T'), ExpLoc(K, L), E), T')
 
      // translation/expr.k
-     rule <k>Initializer(nclv(Loc:SymLoc, T::Type) := ExpLoc(tv(V:CValue, T'::UType), CLoc:CabsLoc))
-          => init(Loc, V, T)
-          ...</k>
-          <curr-program-loc> _ => CLoc </curr-program-loc>
-          requires notBool isLinkerLoc(Loc)
-               andBool (utype(T) ==Type T')
-     rule <k> Initializer(nclv(Loc:SymLoc, T::Type) := ExpLoc(tv(V:CValue, T'::UType), CLoc:CabsLoc)) => .K ...</k>
-          <elab>... .K => Initializer(lv(Loc, T) := checkUse(ExpLoc(tv(V, T'), CLoc))) </elab>
-          requires isLinkerLoc(Loc)
-               andBool (utype(T) ==Type T')
-     rule <k> Initializer(ncle(L:KItem, T::Type) := ExpLoc(R:RValue), CLoc:CabsLoc) => .K ...</k>
-          <elab>... .K => Initializer(L := ExpLoc({stripHold(R)}:>KItem, CLoc)) </elab>
-          requires utype(T) ==Type utype(R)
 
 
      // interpretation.k
