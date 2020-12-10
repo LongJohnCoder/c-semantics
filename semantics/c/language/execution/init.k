@@ -292,5 +292,8 @@ module C-EXECUTION-INIT
           <curr-program-loc> _ => L </curr-program-loc>
           requires notBool isKResult(K)
 
+     rule <k> tv(...) ~> (#freezerExecExpLoc(L:CabsLoc) => .K) ... </k>
+          <curr-program-loc> _ => L </curr-program-loc>
+
 endmodule
 
