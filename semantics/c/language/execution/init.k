@@ -286,7 +286,9 @@ module C-EXECUTION-INIT
      rule <k> #ExecExpLoc(checkUse(V:RValue), L:CabsLoc) => checkUse(V) ...</k>
           <curr-program-loc> _ => L </curr-program-loc>
 
-     rule <k> ExpLoc(K:K, L::CabsLoc) => K ~> #freezerExpLoc(L) ... </k>
+     syntax KItem ::= #freezerExecExpLoc(CabsLoc)
+
+     rule <k> #ExecExpLoc(K:K, L::CabsLoc) => K ~> #freezerExecExpLoc(L) ... </k>
           <curr-program-loc> _ => L </curr-program-loc>
           requires notBool isKResult(K)
 
