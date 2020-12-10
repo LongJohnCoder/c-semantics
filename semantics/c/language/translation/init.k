@@ -53,33 +53,37 @@ module C-TRANSLATION-INIT
      rule filterCabsLoc(L:CabsLoc) => L [owise]
 
      rule ExpressionLoc(K:K, L:CabsLoc) => ExpLoc(K, L)
+
      rule typeof(ExpLoc(K:K, _:CabsLoc) => K)
      rule utype(ExpLoc(K:K, _:CabsLoc) => K)
      rule type(ExpLoc(K:K, _:CabsLoc) => K)
      rule stripHold(ExpLoc(K:KItem, L::CabsLoc)) => ExpLoc(stripHold(K), L)
      rule value(ExpLoc(K:K, _:CabsLoc) => K)
+     rule fromConstantExpr(ExpLoc(V:RValue, _::CabsLoc)) => fromConstantExpr(V)
+     rule isNullPointerConstant(ExpLoc(V:RValue, _:CabsLoc)) => isNullPointerConstant(V)
 
      rule isKResult(ExpLoc(K:K, _::CabsLoc)) => isKResult(K)
      rule isRValue(ExpLoc(K:K, _::CabsLoc)) => isRValue(K)
      rule isHold(ExpLoc(K:K, _::CabsLoc)) => isHold(K)
-     rule fromConstantExpr(ExpLoc(V:RValue, _::CabsLoc)) => fromConstantExpr(V)
-     rule isNullPointerConstant(ExpLoc(V:RValue, _:CabsLoc)) => isNullPointerConstant(V)
 
 
-     syntax KItem ::= #freezerExpLoc(CabsLoc)
+     syntax KItem ::= #popExpLoc()
 
      rule
-          <k> ExpLoc(K:K, L::CabsLoc) => K ~> #freezerExpLoc(L) ... </k>
-          <curr-program-loc> _ => L </curr-program-loc>
+          <k> ExpLoc(K:K, L::CabsLoc) => K ~> #popExpLoc() ... </k>
+          <curr-expression-loc> .List => ListItem(L) ...</curr-expression-loc>
           requires notBool isKResult(K)
-     rule
-          <k> (K:KItem ~> #freezerExpLoc(L::CabsLoc)) => ExpLoc(K, L) ... </k>
-          <curr-program-loc> _ => L </curr-program-loc>
-          requires (isKResult(K) orBool isRValue(K)) andBool notBool isLocation(K)
-     rule
-          (ExpLoc(K:KItem, _::CabsLoc) => K) ~> #freezerExpLoc(...)
-          requires isKResult(K) orBool isRValue(K)
 
+     rule <k> te(K:RValue, T:UType) ~> #popExpLoc() => te(ExpLoc(K, L), T) ... </k>
+          <curr-expression-loc> ListItem(L:CabsLoc) => .List ...</curr-expression-loc>
+          requires notBool isLocation(K)
+     rule <k> te(ExpLoc(K:RValue, _), T:UType) ~> #popExpLoc() => te(ExpLoc(K, L), T) ... </k>
+          <curr-expression-loc> ListItem(L:CabsLoc) => .List ...</curr-expression-loc>
+          requires notBool isLocation(K)  // Should never be needed.
+     rule <k> V:RValue ~> (#popExpLoc() => .K) ... </k>
+          <curr-expression-loc> ListItem(_:CabsLoc) => .List ...</curr-expression-loc>
+
+     /*
      rule
           <k> reval(ExpLoc(K:K, L::CabsLoc)) => reval(K) ~> #freezerExpLoc(L) ... </k>
           <curr-program-loc> _ => L </curr-program-loc>
@@ -310,6 +314,7 @@ module C-TRANSLATION-INIT
      // members.k
      rule (ExpLoc(E1:Nclv, _::CabsLoc) => E1) . _:CId
           [structural]
+     */
 
      // initializer.k
      rule figureInit(_:CId, _:Type, SingleInit(ExpLoc(K:KItem, _::CabsLoc) => K))
