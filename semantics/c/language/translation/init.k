@@ -94,8 +94,6 @@ module C-TRANSLATION-INIT
      rule (ExpLoc(ncle(K:KItem, T::Type), _:CabsLoc) => ncle(K, T)) --
      rule (ExpLoc(ncle(K:KItem, T::Type), _:CabsLoc) => ncle(K, T)) := _
 
-     syntax KItem ::= leftExpLoc(CabsLoc) | rightExpLoc(CabsLoc)
-
      // tagged.k
      rule initEnum(X:CId, (ExpLoc(tv(...) #as V:RValue, _:CabsLoc) => V))
 
