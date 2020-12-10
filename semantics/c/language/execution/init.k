@@ -27,6 +27,7 @@ module C-EXECUTION-INIT
      imports SETTINGS-SYNTAX
 
      imports C-CHECK-RESTRICT-SYNTAX
+     imports C-CHECK-USE-SYNTAX
      imports C-DYNAMIC-SYNTAX
      imports C-ENV-SYNTAX
      imports C-ERROR-SYNTAX
