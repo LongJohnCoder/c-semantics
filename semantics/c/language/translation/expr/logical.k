@@ -45,5 +45,4 @@ module C-EXPR-LOGICAL
      rule te(Left:KItem || Right:KItem, T:UType) ~> leftExpLoc(L:CabsLoc) => te(ExpLoc(Left, L) || Right, T)
      rule te(Left:KItem || Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(Left || ExpLoc(Right, L), T)
 
-
 endmodule

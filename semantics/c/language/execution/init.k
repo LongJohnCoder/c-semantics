@@ -282,6 +282,8 @@ module C-EXECUTION-INIT
           <curr-program-loc> _ => L </curr-program-loc>
      rule <k> #ExecExpLoc(V:RValue, L:CabsLoc) => V ...</k>
           <curr-program-loc> _ => L </curr-program-loc>
+     rule <k> #ExecExpLoc(checkUse(V:RValue), L:CabsLoc) => checkUse(V) ...</k>
+          <curr-program-loc> _ => L </curr-program-loc>
 
 endmodule
 
