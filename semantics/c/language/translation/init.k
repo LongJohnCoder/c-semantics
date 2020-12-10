@@ -103,6 +103,19 @@ module C-TRANSLATION-INIT
      rule L:Nclv := ExpLoc(R:RValue, Loc:CabsLoc) => L := R ~> rightExpLoc(Loc)
      rule te(L:Nclv := R:RValue, T:UType) ~> rightExpLoc(Loc:CabsLoc) => te(L := ExpLoc(R, Loc), T)
 
+     // unary.k
+     rule - ExpLoc(te(...) #as Te, L:CabsLoc) => - Te ~> rightExpLoc(L)
+     rule - ExpLoc(tv(...) #as Tv, L:CabsLoc) => - Tv ~> rightExpLoc(L)
+     rule te(- Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(- ExpLoc(Right, L), T)
+
+     rule + ExpLoc(te(...) #as Te, L:CabsLoc) => + Te ~> rightExpLoc(L)
+     rule + ExpLoc(tv(...) #as Tv, L:CabsLoc) => + Tv ~> rightExpLoc(L)
+     rule te(+ Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(+ ExpLoc(Right, L), T)
+
+     rule ! ExpLoc(te(...) #as Te, L:CabsLoc) => ! Te ~> rightExpLoc(L)
+     rule ! ExpLoc(tv(...) #as Tv, L:CabsLoc) => ! Tv ~> rightExpLoc(L)
+     rule te(! Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(! ExpLoc(Right, L), T)
+
      // bitwise.k
      rule ExpLoc(te(...) #as Te, L:CabsLoc) >> Right:RValue => Te >> Right ~> leftExpLoc(L)
      rule ExpLoc(tv(...) #as Tv, L:CabsLoc) >> Right:RValue => Tv >> Right ~> leftExpLoc(L)
@@ -138,6 +151,10 @@ module C-TRANSLATION-INIT
      rule Left:RValue ^ ExpLoc(tv(...) #as Tv, L:CabsLoc) => Left ^ Tv ~> rightExpLoc(L)
      rule te(Left:KItem ^ Right:KItem, T:UType) ~> leftExpLoc(L:CabsLoc) => te(ExpLoc(Left, L) ^ Right, T)
      rule te(Left:KItem ^ Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(Left ^ ExpLoc(Right, L), T)
+
+     rule ~ ExpLoc(te(...) #as Te, L:CabsLoc) => ~ Te ~> rightExpLoc(L)
+     rule ~ ExpLoc(tv(...) #as Tv, L:CabsLoc) => ~ Tv ~> rightExpLoc(L)
+     rule te(~ Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(~ ExpLoc(Right, L), T)
 
      // multiplicative.k
 
@@ -184,6 +201,43 @@ module C-TRANSLATION-INIT
      rule ExpLoc(tv(...) #as Tv:RValue, _:CabsLoc) ~> rightExpLoc(L:CabsLoc) => ExpLoc(Tv, L)
      rule ExpLoc(tv(...) #as Tv:RValue, _:CabsLoc) ~> leftExpLoc(L:CabsLoc) => ExpLoc(Tv, L)
 
+     // relational.k
+
+     rule ExpLoc(te(...) #as Te, L:CabsLoc) < Right:RValue => Te < Right ~> leftExpLoc(L)
+     rule ExpLoc(tv(...) #as Tv, L:CabsLoc) < Right:RValue => Tv < Right ~> leftExpLoc(L)
+     rule Left:RValue < ExpLoc(te(...) #as Te, L:CabsLoc) => Left < Te ~> rightExpLoc(L)
+     rule Left:RValue < ExpLoc(tv(...) #as Tv, L:CabsLoc) => Left < Tv ~> rightExpLoc(L)
+     rule te(Left:KItem < Right:KItem, T:UType) ~> leftExpLoc(L:CabsLoc) => te(ExpLoc(Left, L) < Right, T)
+     rule te(Left:KItem < Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(Left < ExpLoc(Right, L), T)
+
+     rule ExpLoc(te(...) #as Te, L:CabsLoc) <= Right:RValue => Te <= Right ~> leftExpLoc(L)
+     rule ExpLoc(tv(...) #as Tv, L:CabsLoc) <= Right:RValue => Tv <= Right ~> leftExpLoc(L)
+     rule Left:RValue <= ExpLoc(te(...) #as Te, L:CabsLoc) => Left <= Te ~> rightExpLoc(L)
+     rule Left:RValue <= ExpLoc(tv(...) #as Tv, L:CabsLoc) => Left <= Tv ~> rightExpLoc(L)
+     rule te(Left:KItem <= Right:KItem, T:UType) ~> leftExpLoc(L:CabsLoc) => te(ExpLoc(Left, L) <= Right, T)
+     rule te(Left:KItem <= Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(Left <= ExpLoc(Right, L), T)
+
+     rule ExpLoc(te(...) #as Te, L:CabsLoc) == Right:RValue => Te == Right ~> leftExpLoc(L)
+     rule ExpLoc(tv(...) #as Tv, L:CabsLoc) == Right:RValue => Tv == Right ~> leftExpLoc(L)
+     rule Left:RValue == ExpLoc(te(...) #as Te, L:CabsLoc) => Left == Te ~> rightExpLoc(L)
+     rule Left:RValue == ExpLoc(tv(...) #as Tv, L:CabsLoc) => Left == Tv ~> rightExpLoc(L)
+     rule te(Left:KItem == Right:KItem, T:UType) ~> leftExpLoc(L:CabsLoc) => te(ExpLoc(Left, L) == Right, T)
+     rule te(Left:KItem == Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(Left == ExpLoc(Right, L), T)
+
+     rule ExpLoc(te(...) #as Te, L:CabsLoc) >= Right:RValue => Te >= Right ~> leftExpLoc(L)
+     rule ExpLoc(tv(...) #as Tv, L:CabsLoc) >= Right:RValue => Tv >= Right ~> leftExpLoc(L)
+     rule Left:RValue >= ExpLoc(te(...) #as Te, L:CabsLoc) => Left >= Te ~> rightExpLoc(L)
+     rule Left:RValue >= ExpLoc(tv(...) #as Tv, L:CabsLoc) => Left >= Tv ~> rightExpLoc(L)
+     rule te(Left:KItem >= Right:KItem, T:UType) ~> leftExpLoc(L:CabsLoc) => te(ExpLoc(Left, L) >= Right, T)
+     rule te(Left:KItem >= Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(Left >= ExpLoc(Right, L), T)
+
+     rule ExpLoc(te(...) #as Te, L:CabsLoc) > Right:RValue => Te > Right ~> leftExpLoc(L)
+     rule ExpLoc(tv(...) #as Tv, L:CabsLoc) > Right:RValue => Tv > Right ~> leftExpLoc(L)
+     rule Left:RValue > ExpLoc(te(...) #as Te, L:CabsLoc) => Left > Te ~> rightExpLoc(L)
+     rule Left:RValue > ExpLoc(tv(...) #as Tv, L:CabsLoc) => Left > Tv ~> rightExpLoc(L)
+     rule te(Left:KItem > Right:KItem, T:UType) ~> leftExpLoc(L:CabsLoc) => te(ExpLoc(Left, L) > Right, T)
+     rule te(Left:KItem > Right:KItem, T:UType) ~> rightExpLoc(L:CabsLoc) => te(Left > ExpLoc(Right, L), T)
+
      // reference.k
 
      rule * ExpLoc(te(...) #as Te, L:CabsLoc) => * Te ~> rightExpLoc(L)
@@ -207,9 +261,6 @@ module C-TRANSLATION-INIT
 
      // translation/cast.k
      rule cast(T'::UType, ExpLoc(te(K:KItem, _), L:CabsLoc), E::Bool) => te(#Cast(type(T'), ExpLoc(K, L), E), T')
-
-     // translation/expr.k
-
 
      // interpretation.k
      rule ArrayType(_, (ExpLoc(V:RValue, _) => V), _)
