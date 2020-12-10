@@ -100,7 +100,7 @@ module C-TRANSLATION-INIT
      rule initEnum(X:CId, (ExpLoc(tv(...) #as V:RValue, _:CabsLoc) => V))
 
      // translation/assignment.k
-     rule L:Nclv := ExpLoc(R:RValue, Loc:CabsLoc) => L := R ~>rule rightExpLoc(Loc)
+     rule L:Nclv := ExpLoc(R:RValue, Loc:CabsLoc) => L := R ~> rightExpLoc(Loc)
      rule te(L:Nclv := R:RValue, T:UType) ~> rightExpLoc(Loc:CabsLoc) => te(L := ExpLoc(R, Loc), T)
 
      // bitwise.k
