@@ -100,6 +100,7 @@ module C-TRANSLATION-INIT
                => reval(Nclv) ~> #popExpLoc()
           ...</k>
           <curr-expression-loc> .List => ListItem(L) ...</curr-expression-loc>
+          [priority(75)]
 
      rule <k> V:RValue ~> (#popExpLoc() => .K) ... </k>
           <curr-expression-loc> ListItem(_:CabsLoc) => .List ...</curr-expression-loc>
