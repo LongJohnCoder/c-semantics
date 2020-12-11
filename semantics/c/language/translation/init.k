@@ -83,7 +83,7 @@ module C-TRANSLATION-INIT
           requires notBool isLocation(K)
      rule <k> te(ExpLoc(K:RValue, _), T:UType) ~> #popExpLoc() => te(ExpLoc(K, L), T) ... </k>
           <curr-expression-loc> ListItem(L:CabsLoc) => .List ...</curr-expression-loc>
-          requires notBool isLocation(K)  // Should never be needed.
+          requires notBool isLocation(K)  // The requires clause should never be needed.
 
      rule <k> ncle(K:KItem, T:Type) ~> #popExpLoc() => ncle(ExpLoc(K, L), T) ... </k>
           <curr-expression-loc> ListItem(L:CabsLoc) => .List ...</curr-expression-loc>
@@ -107,8 +107,9 @@ module C-TRANSLATION-INIT
           [priority(25)]
      */
 
-     //rule <k> V:RValue ~> (#popExpLoc() => .K) ... </k>
-     //     <curr-expression-loc> ListItem(_:CabsLoc) => .List ...</curr-expression-loc>
+     rule <k> V:RValue ~> (#popExpLoc() => .K) ... </k>
+          <curr-expression-loc> ListItem(_:CabsLoc) => .List ...</curr-expression-loc>
+          requires notBool isRHold(V)
      rule <k> reval(V:RValue) ~> (#popExpLoc() => .K) ... </k>
           <curr-expression-loc> ListItem(_:CabsLoc) => .List ...</curr-expression-loc>
 
