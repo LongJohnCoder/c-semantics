@@ -92,12 +92,15 @@ module C-TRANSLATION-INIT
           <curr-expression-loc> ListItem(L:CabsLoc) => .List ...</curr-expression-loc>
           requires notBool isLocation(K)  // Should never be needed.
 
-     rule <k> nclv(K:KItem, T:Type) ~> #popExpLoc() => nclv(ExpLoc(K, L), T) ... </k>
+     rule <k> nclv(K:KItem, T:Type) ~> #popExpLoc() => ExpLoc(nclv(K, T), L) ... </k>
           <curr-expression-loc> ListItem(L:CabsLoc) => .List ...</curr-expression-loc>
           requires notBool isLocation(K)
      rule <k> nclv(ExpLoc(K:KItem, _), T:Type) ~> #popExpLoc() => nclv(ExpLoc(K, L), T) ... </k>
           <curr-expression-loc> ListItem(L:CabsLoc) => .List ...</curr-expression-loc>
           requires notBool isLocation(K)  // Should never be needed.
+     rule <k> reval(ExpLoc(nclv(...) #as Nclv:Nclv, L::CabsLoc)) => reval(Nclv) ~> #popExpLoc()
+          ...</k>
+          <curr-expression-loc> .List => ListItem(L) ...</curr-expression-loc>
 
      rule <k> V:RValue ~> (#popExpLoc() => .K) ... </k>
           <curr-expression-loc> ListItem(_:CabsLoc) => .List ...</curr-expression-loc>
@@ -335,7 +338,6 @@ module C-TRANSLATION-INIT
      // members.k
      rule (ExpLoc(E1:Nclv, _::CabsLoc) => E1) . _:CId
           [structural]
-     */
 
      // initializer.k
      rule figureInit(_:CId, _:Type, SingleInit(ExpLoc(K:KItem, _::CabsLoc) => K))
@@ -343,6 +345,7 @@ module C-TRANSLATION-INIT
      //interpretation.k
      rule BitFieldType(_::KItem, (ExpLoc(K:KItem, _::CabsLoc) => K))
           [structural]
+     */
 
 
 
