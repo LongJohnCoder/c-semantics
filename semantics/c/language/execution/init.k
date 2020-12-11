@@ -286,6 +286,8 @@ module C-EXECUTION-INIT
 
      rule <k> tv(...) ~> (#popExpLoc() => .K) ... </k>
           <curr-expression-loc> ListItem(L) => .List ...</curr-expression-loc>
+     rule <k> nclv(...) ~> (#popExpLoc() => .K) ... </k>
+          <curr-expression-loc> ListItem(L) => .List ...</curr-expression-loc>
 
      /*
      syntax Location ::= #ExecExpLoc(K, CabsLoc)
