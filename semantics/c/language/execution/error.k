@@ -30,7 +30,8 @@ module C-EXECUTION-ERROR
      rule <k> EXIT(E:ErrorMsg) => reportError(E, Tu, S, Loc, REnv, L) ~> HALT ...</k>
           <curr-tu> Tu::String </curr-tu>
           <curr-scope> S::Scope </curr-scope>
-          <curr-expression-loc> ListItem(Loc::CabsLoc) ...</curr-expression-loc>
+          <curr-program-loc> Loc::CabsLoc </curr-program-loc>
+          // <curr-expression-loc> ListItem(Loc::CabsLoc) ...</curr-expression-loc>
           <call-stack> L::List </call-stack>
           <renv> REnv::Map </renv>
 
