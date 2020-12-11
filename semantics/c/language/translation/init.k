@@ -103,6 +103,8 @@ module C-TRANSLATION-INIT
 
      rule <k> V:RValue ~> (#popExpLoc() => .K) ... </k>
           <curr-expression-loc> ListItem(_:CabsLoc) => .List ...</curr-expression-loc>
+     rule <k> reval(V:RValue) ~> (#popExpLoc() => .K) ... </k>
+          <curr-expression-loc> ListItem(_:CabsLoc) => .List ...</curr-expression-loc>
 
      /*
      rule
