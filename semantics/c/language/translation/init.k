@@ -76,8 +76,7 @@ module C-TRANSLATION-INIT
           <k> ExpLoc(K:K, L::CabsLoc) => K ~> #popExpLoc() ... </k>
           <curr-expression-loc> .List => ListItem(L) ...</curr-expression-loc>
           requires notBool isKResult(K)
-     rule
-          <k> ExpLoc(rv(...) #as Rv:RValue, _::CabsLoc) => Rv ... </k>
+     rule ExpLoc(tv(...) #as Tv:RValue, _::CabsLoc) => Rv
 
      rule <k> te(K:RValue, T:UType) ~> #popExpLoc() => te(ExpLoc(K, L), T) ... </k>
           <curr-expression-loc> ListItem(L:CabsLoc) => .List ...</curr-expression-loc>
