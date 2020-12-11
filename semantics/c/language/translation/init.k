@@ -274,10 +274,12 @@ module C-TRANSLATION-INIT
 
      // translation/cast.k
      rule cast(T'::UType, ExpLoc(te(K:KItem, _), L:CabsLoc), E::Bool) => te(#Cast(type(T'), ExpLoc(K, L), E), T')
+     */
 
      // interpretation.k
      rule ArrayType(_, (ExpLoc(V:RValue, _) => V), _)
 
+     /*
      // Assignment.k
      rule (ExpLoc(_:Nclv, _::CabsLoc) #as E1) *= E2:RValue
           => compoundAssign(E1, ncle(LHOLE, type(E1)) := te(RHOLE, utype(E1)) * E2)
