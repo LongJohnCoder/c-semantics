@@ -7,7 +7,9 @@ module C-LINKING-INTERFACE
           <curr-scope>S::Scope</curr-scope>
 
      rule [[ currentTranslationLoc() => Loc ]]
-          <curr-program-loc>Loc::CabsLoc</curr-program-loc>
+          <curr-expression-loc> .List </curr-expression-loc>
+     rule [[ currentTranslationLoc() => Loc ]]
+          <curr-expression-loc> ListItem(Loc::CabsLoc) ...</curr-expression-loc>
 
      rule <k> setTranslationLoc(Loc::CabsLoc) => .K ... </k>
           <curr-program-loc> _ => Loc </curr-program-loc>
