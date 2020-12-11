@@ -63,9 +63,12 @@ module C-TRANSLATION-INIT
      rule isNullPointerConstant(ExpLoc(V:RValue, _:CabsLoc)) => isNullPointerConstant(V)
 
      rule isKResult(ExpLoc(K:K, _::CabsLoc)) => isKResult(K)
-     rule isRValue(ExpLoc(K:K, _::CabsLoc)) => isRValue(K)
+     rule isRValue(ExpLoc(K:K, _::CabsLoc)) => isRValue(K) andBool notBool isTv(K)
      rule isHold(ExpLoc(K:K, _::CabsLoc)) => isHold(K)
 
+     syntax Bool ::= isTv(K)  [function]
+     rule isTv(tv(...)) => true
+     rule isTv(_) => false [owise]
 
      syntax KItem ::= #popExpLoc()
 
