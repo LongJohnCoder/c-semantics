@@ -92,6 +92,13 @@ module C-TRANSLATION-INIT
           <curr-expression-loc> ListItem(L:CabsLoc) => .List ...</curr-expression-loc>
           requires notBool isLocation(K)  // Should never be needed.
 
+     rule <k> nclv(K:KItem, T:Type) ~> #popExpLoc() => nclv(ExpLoc(K, L), T) ... </k>
+          <curr-expression-loc> ListItem(L:CabsLoc) => .List ...</curr-expression-loc>
+          requires notBool isLocation(K)
+     rule <k> nclv(ExpLoc(K:KItem, _), T:Type) ~> #popExpLoc() => nclv(ExpLoc(K, L), T) ... </k>
+          <curr-expression-loc> ListItem(L:CabsLoc) => .List ...</curr-expression-loc>
+          requires notBool isLocation(K)  // Should never be needed.
+
      rule <k> V:RValue ~> (#popExpLoc() => .K) ... </k>
           <curr-expression-loc> ListItem(_:CabsLoc) => .List ...</curr-expression-loc>
 
