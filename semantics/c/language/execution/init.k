@@ -278,6 +278,7 @@ module C-EXECUTION-INIT
 
      rule currentSemantics() => ExecutionSemantics()
 
+     /*
      syntax Location ::= #ExecExpLoc(K, CabsLoc)
      rule <k> ExpLoc(K:K, L:CabsLoc) => #ExecExpLoc(K, L) ...</k>
           <curr-program-loc> _ => L </curr-program-loc>
@@ -298,6 +299,7 @@ module C-EXECUTION-INIT
           <curr-program-loc> _ => L </curr-program-loc>
      rule <k> voidVal ~> (#freezerExecExpLoc(L:CabsLoc) => .K) ... </k>
           <curr-program-loc> _ => L </curr-program-loc>
+     */
 
 endmodule
 
