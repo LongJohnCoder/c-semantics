@@ -345,9 +345,13 @@ module C-TRANSLATION-INIT
      // members.k
      rule (ExpLoc(E1:Nclv, _::CabsLoc) => E1) . _:CId
           [structural]
+     */
 
+     // TODO: Something better.
      // initializer.k
      rule figureInit(_:CId, _:Type, SingleInit(ExpLoc(K:KItem, _::CabsLoc) => K))
+
+     /*
 
      //interpretation.k
      rule BitFieldType(_::KItem, (ExpLoc(K:KItem, _::CabsLoc) => K))
